@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DoubleLinkedList
 {
@@ -6,36 +7,41 @@ namespace DoubleLinkedList
     {
         static void Main(string[] args)
         {
-            //DoubleLinkedListNode<int> node0 = new DoubleLinkedListNode<int>() { Value = 4 };
-            //DoubleLinkedListNode<int> node1 = new DoubleLinkedListNode<int>() { Value = 5, Next = node0 };
-            //DoubleLinkedListNode<string> node2 = new DoubleLinkedListNode<string>() { Value = "Hello, World!" };
-
-            //Console.WriteLine("Value: {0}", node1?.Value);
-            //Console.WriteLine(" Next: {0}", node1?.Next.Value);
-            //Console.WriteLine("Value: {0}", node2?.Value);
-            //Console.WriteLine(" Next: {0}", node2?.Next);
-
-            ////DoubleLinkedList list;
-            //object x = null;
-            //x = 4;
-            //x = x ?? 5;
-            //Console.WriteLine(x);
-
-            //int? y = 2;
-            ////y = null;
-            //y = y ?? 3;
-            //Console.WriteLine(y);
+            const int size = 5;
+            int[] vec = new int[size] { 4, 1, 5, 7, 2 };
 
             DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-            Console.WriteLine("Count: {0}\nFirst value: {1}\nLast value: {2}\n", list.Count, list.First?.Value, list.Last?.Value);
 
-            list.AddLast(1);
-            list.AddLast(2);
-            list.AddFirst(0);
-            Console.WriteLine("Count: {0}\nFirst value: {1}\nLast value: {2}\n", list.Count, list.First?.Value, list.Last?.Value);
+            list.AddFirst(vec[1]);
+            list.AddLast(vec[2]);
+            list.AddLast(vec[3]);
+            list.AddFirst(vec[0]);
+            list.AddLast(vec[4]);
+
+            /* ***** */
+
+            Console.WriteLine("\n  Input data Test\n-------------------\n");
+
+            IDoubleLinkedListNode<int> Temp = list.First;
+            for (int i = 0; i < size; i++)
+            {
+                Assert.AreEqual(vec[i], Temp.Value);
+                Console.WriteLine("  Pos: {0,2},  Value: {1,2}\n", i, Temp.Value);
+                Temp = Temp.Next;
+            }
+
+            /* ***** */
+
+            Console.WriteLine("\n  Reverse Test\n----------------\n");
 
             list.Reverse();
-            Console.WriteLine("Count: {0}\nFirst value: {1}\nLast value: {2}\n", list.Count, list.First?.Value, list.Last?.Value);
+            Temp = list.First;
+            for (int i = size - 1; i >= 0; i--)
+            {
+                Assert.AreEqual(vec[i], Temp.Value);
+                Console.WriteLine("  Pos: {0,2},  Value: {1,2}\n", (size - 1) - i, Temp.Value);
+                Temp = Temp.Next;
+            }
         }
     }
 }

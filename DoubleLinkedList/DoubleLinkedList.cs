@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DoubleLinkedList
+﻿namespace DoubleLinkedList
 {
     public interface IDoubleLinkedListNode<T>
     {
